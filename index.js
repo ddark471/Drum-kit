@@ -2,20 +2,21 @@ let size = document.querySelectorAll("button").length;
 
 for(let i = 0; i < size; i++){
     document.querySelectorAll("button")[i].addEventListener("click", function (){
-
         let buttonValue = this.innerHTML;
 
-        keyboardSound(buttonValue);
+        makeSound(buttonValue);
+        buttonAnimation(buttonValue);
 
 
     });
 };
 
 document.addEventListener("keypress", function(event){
-    keyboardSound(event.key)
+    makeSound(event.key);
+    buttonAnimation(event.key);
 });
 
-function keyboardSound(key){
+function makeSound(key){
     switch(key) {
 
         case "w":
@@ -54,6 +55,15 @@ function keyboardSound(key){
         break;
     }
 };
+
+function buttonAnimation(currentKey){
+    let activeButton = document.querySelector("." + currentKey);
+    activeButton.classList.add("pressed");
+
+    setTimeout(function(){
+        activeButton.classList.remove("pressed");
+    }, 500);
+}
 
 let bellboy1 = {
     name: "Timmy",
